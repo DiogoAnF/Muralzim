@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ˁ˚ᴥ˚ˀ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Woodstock - https://www.cursors-4u.com/cursor/too390 */
+        * {
+            cursor: url('https://cdn.cursors-4u.net/previews/woodstock-3ee77125-32.webp') 32 32, auto !important;
+        }
+
+        /* End www.Cursors-4U.com Code */
+
+        body {
+            background: linear-gradient(135deg, #d4f0ff 0%, #a8e0ff 50%, #90d5ff 100%);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+        }
+
+        .retro-header {
+            background: linear-gradient(to bottom, #7fcafb 0%, #309df5 49%, #1480ea 50%, #1585ef 100%);
+            color: white;
+            padding: 12px;
+            font-weight: 600;
+            border-bottom: 1px solid #0b5eaf;
+            border-top: 1px solid #b3e1ff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .retro-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .retro-card-header {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 240, 0.8) 100%);
+            padding: 8px 12px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+            color: #2c3e50;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-pills .nav-link {
+            border-radius: 20px;
+            color: #333;
+            background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+            border: 1px solid #ccc;
+            margin-bottom: 8px;
+            box-shadow: inset 0 1px 0 #fff;
+            transition: all 0.2s;
+        }
+
+        .nav-pills .nav-link:hover {
+            background: linear-gradient(to bottom, #f0fbff 0%, #d4efff 100%);
+            border-color: #99d6ff;
+        }
+
+        .nav-pills .nav-link.active {
+            background: linear-gradient(to bottom, #69c5ff 0%, #2999f5 49%, #1282e8 50%, #1588f0 100%) !important;
+            color: white !important;
+            border-color: #0b5eaf;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-tabs .nav-link {
+            border-radius: 8px 8px 0 0;
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e0e0e0 100%);
+            color: #555;
+            border: 1px solid #ccc;
+            margin-right: 2px;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: rgba(255, 255, 255, 0.8) !important;
+            border-bottom-color: transparent !important;
+            font-weight: bold;
+            color: #1480ea;
+        }
+
+        .btn-retro {
+            background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 49%, #e0e0e0 50%, #f5f5f5 100%);
+            border: 1px solid #aaa;
+            border-radius: 20px;
+            color: #333;
+            box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-retro:hover {
+            background: linear-gradient(to bottom, #f0fbff 0%, #d4efff 49%, #bce2ff 50%, #d0efff 100%);
+            border-color: #7fcafb;
+        }
+
+        .btn-retro:active {
+            background: linear-gradient(to bottom, #bce2ff 0%, #d4efff 100%);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4f0ff 0%, #a8e0ff 50%, #90d5ff 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .marquee-banner {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(230, 245, 255, 0.8) 100%);
+            border: 1px solid #b3e1ff;
+            border-radius: 15px;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            color: #0b5eaf;
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-radius: 6px !important;
+            border: 1px solid #aaa;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            border-color: #7fcafb;
+            box-shadow: 0 0 5px rgba(127, 202, 251, 0.5), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            outline: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-screen">
+        <div class="retro-card" style="width: 350px;">
+            <div class="retro-card-header">🔒 ACESSO RESTRITO</div>
+            <div class="card-body p-3">
+                <p class="text-center">Insira suas credenciais para entrar no portal.</p>
+                <div class="mb-3">
+                    <label>Usuário:</label>
+                    <input type="text" id="username" class="form-control form-control-sm rounded-0"
+                        onkeydown="verificarEnter(event)">
+                </div>
+                <div class="mb-3">
+                    <label>Senha:</label>
+                    <input type="password" id="password" class="form-control form-control-sm rounded-0"
+                        onkeydown="verificarEnter(event)">
+                </div>
+                <button onclick="efetuarLogin()" class="btn btn-retro w-100 text-center">Entrar</button>
+                <div id="login-error" class="text-danger mt-2 text-center" style="display:none;">Usuário ou senha
+                    incorretos!</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" style="display: none;">
+        <div class="retro-header d-flex justify-content-between align-items-center">
+            <span>»-(¯`·.·´¯)-> MURALZIM <-(¯`·.·´¯)-« </span>
+        </div>
+
+        <div class="container-fluid mt-3">
+            <div class="marquee-banner">
+                <marquee behavior="scroll" direction="left">✨ °º¤ø,.,ø¤º°`°º¤ø, Nosso próprio kiwiwi
+                    ,ø¤°º¤ø,.,ø¤º°`°º¤ø, ✨</marquee>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="retro-card">
+                        <div class="retro-card-header">📂 MENU PRINCIPAL</div>
+                        <div class="card-body p-2">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
+                                <button class="nav-link active" id="v-pills-inicio-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-inicio" type="button" onclick="mudarCategoria('Início')">🏠
+                                    Início</button>
+                                <button class="nav-link" id="v-pills-filmes-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-filmes" type="button" onclick="mudarCategoria('Filmes')">🎬
+                                    Filmes</button>
+                                <button class="nav-link" id="v-pills-receitas-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-receitas" type="button"
+                                    onclick="mudarCategoria('Receitas')">🍳 Receitas</button>
+                                <button class="nav-link" id="v-pills-musicas-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-musicas" type="button"
+                                    onclick="mudarCategoria('Músicas')">🎵 Músicas</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="retro-card">
+                        <div class="retro-card-header">➕ ADICIONAR NOVO LINK</div>
+                        <div class="card-body p-3">
+                            <div class="mb-2">
+                                <label>URL do Link:</label>
+                                <input type="text" id="input-url" class="form-control form-control-sm rounded-0"
+                                    placeholder="https://...">
+                            </div>
+                            <div class="mb-2">
+                                <label>Título (Opcional):</label>
+                                <input type="text" id="input-titulo" class="form-control form-control-sm rounded-0"
+                                    placeholder="Ex: Filme X">
+                            </div>
+                            <div class="mb-3">
+                                <label>URL da Imagem (Opcional):</label>
+                                <input type="text" id="input-img" class="form-control form-control-sm rounded-0"
+                                    placeholder="https://...">
+                            </div>
+                            <button onclick="adicionarItem()" class="btn btn-retro w-100">Postar no Mural</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="retro-card">
+                        <div class="retro-card-header">📌 EXIBINDO: <span id="categoria-atual">Início</span></div>
+                        <div class="card-body p-2">
+                            <div id="gif-filmes-container" class="text-center mb-3" style="display: none;">
+                                <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXFoczhqYnFrZjRpbmw0amhteTd6a211cTJhYW5ubGJqZG55amliMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aeu60CPZd8zw4/giphy.gif"
+                                    alt="Filmes" style="max-height: 120px; border-radius: 8px;">
+                            </div>
+                            <div id="gif-receitas-container" class="text-center mb-3" style="display: none;">
+                                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjI1MWgyY3J6N2FzOHRiMG5sMG82Mm8yd3J0Ym8wN2ZyYTg3cHY1OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3SiOpdO5AHq5q/giphy.gif"
+                                    alt="Receitas" style="max-height: 120px; border-radius: 8px;">
+                            </div>
+                            <div id="gif-musicas-container" class="text-center mb-3" style="display: none;">
+                                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VjNDJ4dGdxNjhjOHpxM3Vwamw2MG1rMm81OTZuaGdsdzNtaDlsYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/J9dXe6GwvmJmU/giphy.gif"
+                                    alt="Músicas" style="max-height: 120px; border-radius: 8px;">
+                            </div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist" style="display: none;">
+                                <li class="nav-item"><button class="nav-link active" id="nos-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab-conteudo" type="button"
+                                        onclick="mudarSubAba('Nos')">👩‍❤️‍👨 Nós</button></li>
+                                <li class="nav-item"><button class="nav-link" id="voce-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab-conteudo" type="button" onclick="mudarSubAba('Voce')">👉
+                                        Você</button></li>
+                                <li class="nav-item"><button class="nav-link" id="eu-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab-conteudo" type="button" onclick="mudarSubAba('Eu')">👈
+                                        Eu</button></li>
+                            </ul>
+
+                            <div class="tab-content p-3" id="myTabContent"
+                                style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255,255,255,0.8); border-top: transparent; border-radius: 0 0 8px 8px;">
+                                <div class="tab-pane fade show active" id="tab-conteudo">
+                                    <div class="row" id="container-cards"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+
+        // Suas credenciais oficiais do Muralzim
+        const firebaseConfig = {
+            apiKey: "AIzaSyBPXS_r8li-QQ1tBwnYJjSJGL3QQG50Tzs",
+            authDomain: "muralzim-815bd.firebaseapp.com",
+            databaseURL: "https://muralzim-815bd-default-rtdb.firebaseio.com",
+            projectId: "muralzim-815bd",
+            storageBucket: "muralzim-815bd.firebasestorage.app",
+            messagingSenderId: "976876145128",
+            appId: "1:976876145128:web:e13b1449550f50ab13bc5d"
+        };
+
+        // Inicializa o Firebase e o Realtime Database
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Variáveis Globais de Controle de Abas
+        let categoriaAtual = "Início";
+        let subAbaAtual = "Nos";
+        let todosDados = [];
+
+        // 🔑 DEFINA SEUS USUÁRIOS E SENHAS AQUI:
+        const usuariosPermitidos = {
+            "diogo": "senha123",
+            "namorada": "senha456"
+        };
+
+        // Permite logar com a tecla Enter
+        window.verificarEnter = function (event) {
+            if (event.key === 'Enter') {
+                efetuarLogin();
+            }
+        }
+
+        // Função de Login
+        window.efetuarLogin = function () {
+            const user = document.getElementById("username").value.toLowerCase().trim();
+            const pass = document.getElementById("password").value;
+
+            if (usuariosPermitidos[user] && usuariosPermitidos[user] === pass) {
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+
+                // Começa a escutar o banco de dados em tempo real
+                ouvirBancoDeDados();
+
+                // Força a atualização da interface para o estado inicial
+                mudarCategoria("Início");
+            } else {
+                document.getElementById("login-error").style.display = "block";
+            }
+        }
+
+        // Controle de navegação das abas laterais
+        window.mudarCategoria = function (novaCategoria) {
+            categoriaAtual = novaCategoria;
+            document.getElementById("categoria-atual").innerText = novaCategoria;
+
+            // Mostra o GIF apenas na aba correspondente
+            const gifFilmes = document.getElementById("gif-filmes-container");
+            if (gifFilmes) gifFilmes.style.display = novaCategoria === "Filmes" ? "block" : "none";
+
+            const gifReceitas = document.getElementById("gif-receitas-container");
+            if (gifReceitas) gifReceitas.style.display = novaCategoria === "Receitas" ? "block" : "none";
+
+            const gifMusicas = document.getElementById("gif-musicas-container");
+            if (gifMusicas) gifMusicas.style.display = novaCategoria === "Músicas" ? "block" : "none";
+
+            // Oculta sub-abas na tela Início
+            const navTabs = document.getElementById("myTab");
+            if (navTabs) navTabs.style.display = novaCategoria === "Início" ? "none" : "flex";
+
+            renderizarMural();
+        }
+
+        // Controle de navegação das abas superiores
+        window.mudarSubAba = function (novaSubAba) {
+            subAbaAtual = novaSubAba;
+            renderizarMural();
+        }
+
+        // Identificador de links do YouTube para gerar a capa automática
+        function obterIdYouTube(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        // Envia o link inserido direto para o Firebase
+        window.adicionarItem = function () {
+            const url = document.getElementById("input-url").value.trim();
+            let titulo = document.getElementById("input-titulo").value.trim();
+            let img = document.getElementById("input-img").value.trim();
+
+            if (!url) { return alert("Por favor, insira uma URL!"); }
+
+            // Se for YouTube, gera o encarte automático
+            const ytId = obterIdYouTube(url);
+            if (ytId) {
+                if (!img) img = `https://img.youtube.com/vi/${ytId}/0.jpg`;
+                if (!titulo) titulo = "Vídeo do YouTube";
+            }
+
+            // Fallbacks caso o usuário não digite título ou imagem para as outras redes
+            if (!titulo) titulo = "Link Compartilhado";
+            if (!img) img = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400";
+
+            // Envia para o nó 'mural' no Firebase
+            const muralRef = ref(db, 'mural');
+            push(muralRef, {
+                categoria: categoriaAtual,
+                subAba: subAbaAtual,
+                url: url,
+                titulo: titulo,
+                img: img
+            });
+
+            // Limpa os inputs após o envio
+            document.getElementById("input-url").value = "";
+            document.getElementById("input-titulo").value = "";
+            document.getElementById("input-img").value = "";
+        }
+
+        // Escuta o Firebase: qualquer mudança lá atualiza a tela de vocês na hora
+        function ouvirBancoDeDados() {
+            const databaseRef = ref(db, 'mural');
+            onValue(databaseRef, (snapshot) => {
+                const data = snapshot.val();
+                todosDados = [];
+                if (data) {
+                    Object.keys(data).forEach(key => {
+                        let item = data[key];
+                        item.id = key;
+                        todosDados.push(item);
+                    });
+                }
+                renderizarMural();
+            });
+        }
+
+        // Desenha os cards na tela filtrando por aba selecionada
+        function renderizarMural() {
+            const container = document.getElementById("container-cards");
+            container.innerHTML = "";
+
+            if (categoriaAtual === "Início") {
+                // ========================================================
+                // ESPAÇO PARA VOCÊ ADICIONAR O TEXTO DA TELA DE INÍCIO:
+                // ========================================================
+                container.innerHTML = `
+                    <div class="col-12 p-4 text-center" style="color: #0b5eaf;">
+                        <h4> 💖 </h4>
+                    </div>
+                `;
+                return;
+            }
+
+            const itensFiltrados = todosDados.filter(item => item.categoria === categoriaAtual && item.subAba === subAbaAtual);
+
+            if (itensFiltrados.length === 0) {
+                container.innerHTML = `<div class="col-12 text-muted text-center py-4">Nenhum link adicionado aqui ainda... 😶</div>`;
+                return;
+            }
+
+            itensFiltrados.forEach(item => {
+                container.innerHTML += `
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="card h-100" style="border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.7); backdrop-filter: blur(5px); border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <img src="${item.img}" class="card-img-top p-2" alt="Encarte" style="max-height: 150px; object-fit: cover; border-radius: 10px 10px 0 0;">
+                        <div class="card-body p-2 d-flex flex-column justify-content-between">
+                            <h6 class="card-title fw-bold" style="font-size: 13px; color: #0b5eaf; text-shadow: 1px 1px 0px rgba(255,255,255,0.8);">${item.titulo}</h6>
+                            <div class="d-flex justify-content-between mt-2">
+                                <a href="${item.url}" target="_blank" class="btn btn-sm btn-retro w-75 me-1" style="font-size: 11px;">🌐 Abrir</a>
+                                <button onclick="deletarItem('${item.id}')" class="btn btn-sm btn-retro w-25 text-danger fw-bold" style="font-size: 11px; padding: 0;" title="Apagar link">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            });
+        }
+
+        // Função para apagar o item do mural
+        window.deletarItem = function (id) {
+            if (confirm("Tem certeza que deseja apagar este link?")) {
+                const itemRef = ref(db, 'mural/' + id);
+                remove(itemRef)
+                    .catch((error) => {
+                        console.error("Erro ao apagar: ", error);
+                        alert("Erro ao apagar link!");
+                    });
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
