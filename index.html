@@ -272,6 +272,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
         import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
         // Suas credenciais oficiais do Muralzim
         const firebaseConfig = {
@@ -287,17 +288,12 @@
         // Inicializa o Firebase e o Realtime Database
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+        const auth = getAuth(app);
 
         // Variáveis Globais de Controle de Abas
         let categoriaAtual = "Início";
         let subAbaAtual = "Nos";
         let todosDados = [];
-
-        // 🔑 DEFINA SEUS USUÁRIOS E SENHAS AQUI:
-        const usuariosPermitidos = {
-            "diogo": "ferreira_diogo",
-            "natalia": "deusa1996"
-        };
 
         // Permite logar com a tecla Enter
         window.verificarEnter = function (event) {
@@ -310,19 +306,45 @@
         window.efetuarLogin = function () {
             const user = document.getElementById("username").value.toLowerCase().trim();
             const pass = document.getElementById("password").value;
+            const errorElement = document.getElementById("login-error");
+            const btnLogin = document.querySelector("#login-screen button");
 
-            if (usuariosPermitidos[user] && usuariosPermitidos[user] === pass) {
-                document.getElementById("login-screen").style.display = "none";
-                document.getElementById("main-content").style.display = "block";
-
-                // Começa a escutar o banco de dados em tempo real
-                ouvirBancoDeDados();
-
-                // Força a atualização da interface para o estado inicial
-                mudarCategoria("Início");
-            } else {
-                document.getElementById("login-error").style.display = "block";
+            if (!user || !pass) {
+                errorElement.innerText = "Preencha usuário e senha!";
+                errorElement.style.display = "block";
+                return;
             }
+
+            // Transforma o usuário simples em e-mail para o Firebase Auth
+            const email = user.includes("@") ? user : `${user}@muralzim.com`;
+
+            errorElement.style.display = "none";
+            btnLogin.innerText = "Entrando...";
+            btnLogin.disabled = true;
+
+            signInWithEmailAndPassword(auth, email, pass)
+                .then((userCredential) => {
+                    document.getElementById("login-screen").style.display = "none";
+                    document.getElementById("main-content").style.display = "block";
+
+                    // Começa a escutar o banco de dados em tempo real
+                    ouvirBancoDeDados();
+
+                    // Força a atualização da interface para o estado inicial
+                    mudarCategoria("Início");
+                })
+                .catch((error) => {
+                    btnLogin.innerText = "Entrar";
+                    btnLogin.disabled = false;
+
+                    if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                        errorElement.innerText = "Usuário ou senha incorretos!";
+                    } else {
+                        errorElement.innerText = "Erro ao fazer login.";
+                        console.error(error);
+                    }
+                    errorElement.style.display = "block";
+                });
         }
 
         // Controle de navegação das abas laterais
