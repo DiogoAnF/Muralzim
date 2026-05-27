@@ -352,10 +352,10 @@
                                         onclick="mudarSubAba('Nos')">👩‍❤️‍👨 Nós</button></li>
                                 <li class="nav-item"><button class="nav-link" id="voce-tab" data-bs-toggle="tab"
                                         data-bs-target="#tab-conteudo" type="button" onclick="mudarSubAba('Voce')">👉
-                                        Você</button></li>
+                                        Natália</button></li>
                                 <li class="nav-item"><button class="nav-link" id="eu-tab" data-bs-toggle="tab"
                                         data-bs-target="#tab-conteudo" type="button" onclick="mudarSubAba('Eu')">👈
-                                        Eu</button></li>
+                                        Diogo</button></li>
                             </ul>
 
                             <div class="tab-content p-3" id="myTabContent"
@@ -473,11 +473,31 @@
             const navTabs = document.getElementById("myTab");
             if (navTabs) navTabs.style.display = (novaCategoria === "Início" || novaCategoria === "Calendário") ? "none" : "flex";
 
+            const voceTab = document.getElementById("voce-tab");
+            const euTab = document.getElementById("eu-tab");
+            if (voceTab && euTab) {
+                if (novaCategoria === "Receitas") {
+                    voceTab.parentElement.style.display = "none";
+                    euTab.parentElement.style.display = "none";
+                    if (subAbaAtual !== "Nos") {
+                        document.getElementById("nos-tab").click();
+                    }
+                } else {
+                    voceTab.parentElement.style.display = "";
+                    euTab.parentElement.style.display = "";
+                }
+            }
+
             // Atualiza formulário de adição
             const formLink = document.getElementById("form-link");
             const formEvento = document.getElementById("form-evento");
             const headerAdicionar = document.getElementById("header-adicionar");
             const btnAdicionar = document.getElementById("btn-adicionar");
+            const cardAdicionar = document.getElementById("card-adicionar");
+
+            if (cardAdicionar) {
+                cardAdicionar.style.display = novaCategoria === "Início" ? "none" : "block";
+            }
 
             if (formLink && formEvento) {
                 formLink.style.display = novaCategoria === "Calendário" ? "none" : "block";
