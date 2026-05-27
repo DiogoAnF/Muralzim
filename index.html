@@ -145,6 +145,84 @@
             box-shadow: 0 0 5px rgba(127, 202, 251, 0.5), inset 0 1px 3px rgba(0, 0, 0, 0.1);
             outline: 0;
         }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #0b5eaf;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        .calendar-day-header {
+            text-align: center;
+            font-weight: bold;
+            color: #1480ea;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            font-size: 12px;
+        }
+        .calendar-day {
+            min-height: 80px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+        .calendar-day:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .calendar-day.empty {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+        .calendar-day.today {
+            background: rgba(175, 225, 255, 0.8);
+            border-color: #7fcafb;
+        }
+        .calendar-date {
+            font-weight: bold;
+            color: #555;
+            text-align: right;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        .calendar-event {
+            background: linear-gradient(to right, #69c5ff, #2999f5);
+            color: white;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 3px;
+            margin-bottom: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .calendar-event-del {
+            cursor: pointer;
+            color: rgba(255,255,255,0.7);
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .calendar-event-del:hover {
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -201,29 +279,49 @@
                                 <button class="nav-link" id="v-pills-musicas-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-musicas" type="button"
                                     onclick="mudarCategoria('Músicas')">🎵 Músicas</button>
+                                <button class="nav-link" id="v-pills-calendario-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-calendario" type="button"
+                                    onclick="mudarCategoria('Calendário')">📅 Calendário</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="retro-card">
-                        <div class="retro-card-header">➕ ADICIONAR NOVO LINK</div>
+                    <div class="retro-card" id="card-adicionar">
+                        <div class="retro-card-header" id="header-adicionar">➕ ADICIONAR NOVO LINK</div>
                         <div class="card-body p-3">
-                            <div class="mb-2">
-                                <label>URL do Link:</label>
-                                <input type="text" id="input-url" class="form-control form-control-sm rounded-0"
-                                    placeholder="https://...">
+                            <div id="form-link">
+                                <div class="mb-2">
+                                    <label>URL do Link:</label>
+                                    <input type="text" id="input-url" class="form-control form-control-sm rounded-0"
+                                        placeholder="https://...">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Título (Opcional):</label>
+                                    <input type="text" id="input-titulo" class="form-control form-control-sm rounded-0"
+                                        placeholder="Ex: Filme X">
+                                </div>
+                                <div class="mb-3">
+                                    <label>URL da Imagem (Opcional):</label>
+                                    <input type="text" id="input-img" class="form-control form-control-sm rounded-0"
+                                        placeholder="https://...">
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Título (Opcional):</label>
-                                <input type="text" id="input-titulo" class="form-control form-control-sm rounded-0"
-                                    placeholder="Ex: Filme X">
+                            <div id="form-evento" style="display: none;">
+                                <div class="mb-2">
+                                    <label>Data do Evento:</label>
+                                    <input type="date" id="input-data" class="form-control form-control-sm rounded-0">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Título do Evento:</label>
+                                    <input type="text" id="input-evento-titulo" class="form-control form-control-sm rounded-0"
+                                        placeholder="Ex: Aniversário">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Cor de Destaque:</label>
+                                    <input type="color" id="input-cor-evento" class="form-control form-control-sm rounded-0 w-100" value="#2999f5" style="height: 32px; padding: 2px;">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label>URL da Imagem (Opcional):</label>
-                                <input type="text" id="input-img" class="form-control form-control-sm rounded-0"
-                                    placeholder="https://...">
-                            </div>
-                            <button onclick="adicionarItem()" class="btn btn-retro w-100">Postar no Mural</button>
+                            <button id="btn-adicionar" onclick="adicionarItem()" class="btn btn-retro w-100">Postar no Mural</button>
                         </div>
                     </div>
                 </div>
@@ -243,6 +341,10 @@
                             <div id="gif-musicas-container" class="text-center mb-3" style="display: none;">
                                 <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VjNDJ4dGdxNjhjOHpxM3Vwamw2MG1rMm81OTZuaGdsdzNtaDlsYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/J9dXe6GwvmJmU/giphy.gif"
                                     alt="Músicas" style="max-height: 120px; border-radius: 8px;">
+                            </div>
+                            <div id="gif-calendario-container" class="text-center mb-3" style="display: none;">
+                                <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHg5OXpienhsZW56cjZ5OTZyOXZtcnF2dGYxMGc2NTFxMW1jN3dlcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iRaC9ukzuS1Og/giphy.gif"
+                                    alt="Calendário" style="max-height: 120px; border-radius: 8px;">
                             </div>
                             <ul class="nav nav-tabs" id="myTab" role="tablist" style="display: none;">
                                 <li class="nav-item"><button class="nav-link active" id="nos-tab" data-bs-toggle="tab"
@@ -294,6 +396,8 @@
         let categoriaAtual = "Início";
         let subAbaAtual = "Nos";
         let todosDados = [];
+        let mesAtualCalendario = new Date().getMonth();
+        let anoAtualCalendario = new Date().getFullYear();
 
         // Permite logar com a tecla Enter
         window.verificarEnter = function (event) {
@@ -362,10 +466,38 @@
             const gifMusicas = document.getElementById("gif-musicas-container");
             if (gifMusicas) gifMusicas.style.display = novaCategoria === "Músicas" ? "block" : "none";
 
-            // Oculta sub-abas na tela Início
-            const navTabs = document.getElementById("myTab");
-            if (navTabs) navTabs.style.display = novaCategoria === "Início" ? "none" : "flex";
+            const gifCalendario = document.getElementById("gif-calendario-container");
+            if (gifCalendario) gifCalendario.style.display = novaCategoria === "Calendário" ? "block" : "none";
 
+            // Oculta sub-abas na tela Início e Calendário
+            const navTabs = document.getElementById("myTab");
+            if (navTabs) navTabs.style.display = (novaCategoria === "Início" || novaCategoria === "Calendário") ? "none" : "flex";
+
+            // Atualiza formulário de adição
+            const formLink = document.getElementById("form-link");
+            const formEvento = document.getElementById("form-evento");
+            const headerAdicionar = document.getElementById("header-adicionar");
+            const btnAdicionar = document.getElementById("btn-adicionar");
+
+            if (formLink && formEvento) {
+                formLink.style.display = novaCategoria === "Calendário" ? "none" : "block";
+                formEvento.style.display = novaCategoria === "Calendário" ? "block" : "none";
+                headerAdicionar.innerText = novaCategoria === "Calendário" ? "➕ ADICIONAR EVENTO" : "➕ ADICIONAR NOVO LINK";
+                btnAdicionar.innerText = novaCategoria === "Calendário" ? "Adicionar ao Calendário" : "Postar no Mural";
+            }
+
+            renderizarMural();
+        }
+
+        window.mudarMesCalendario = function(delta) {
+            mesAtualCalendario += delta;
+            if (mesAtualCalendario > 11) {
+                mesAtualCalendario = 0;
+                anoAtualCalendario++;
+            } else if (mesAtualCalendario < 0) {
+                mesAtualCalendario = 11;
+                anoAtualCalendario--;
+            }
             renderizarMural();
         }
 
@@ -384,6 +516,29 @@
 
         // Envia o link inserido direto para o Firebase
         window.adicionarItem = function () {
+            if (categoriaAtual === "Calendário") {
+                const dataEvento = document.getElementById("input-data").value;
+                const tituloEvento = document.getElementById("input-evento-titulo").value.trim();
+                const corEvento = document.getElementById("input-cor-evento").value;
+
+                if (!dataEvento || !tituloEvento) {
+                    return alert("Por favor, preencha a data e o título do evento!");
+                }
+
+                const muralRef = ref(db, 'mural');
+                push(muralRef, {
+                    categoria: "Calendário",
+                    dataEvento: dataEvento,
+                    titulo: tituloEvento,
+                    cor: corEvento
+                });
+
+                document.getElementById("input-data").value = "";
+                document.getElementById("input-evento-titulo").value = "";
+                document.getElementById("input-cor-evento").value = "#2999f5";
+                return;
+            }
+
             const url = document.getElementById("input-url").value.trim();
             let titulo = document.getElementById("input-titulo").value.trim();
             let img = document.getElementById("input-img").value.trim();
@@ -448,6 +603,70 @@
                         <h4> 💖 </h4>
                     </div>
                 `;
+                return;
+            }
+
+            if (categoriaAtual === "Calendário") {
+                const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                const nomeMes = meses[mesAtualCalendario];
+                
+                const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+                
+                let htmlCalendario = `
+                    <div class="col-12">
+                        <div class="calendar-header">
+                            <button class="btn btn-sm btn-retro" onclick="mudarMesCalendario(-1)">◀ Anterior</button>
+                            <h5 class="m-0" style="color: #1480ea; font-weight: bold; text-shadow: 1px 1px 0px rgba(255,255,255,0.8);">${nomeMes} ${anoAtualCalendario}</h5>
+                            <button class="btn btn-sm btn-retro" onclick="mudarMesCalendario(1)">Próximo ▶</button>
+                        </div>
+                        <div class="calendar-grid">
+                `;
+
+                diasSemana.forEach(dia => {
+                    htmlCalendario += `<div class="calendar-day-header">${dia}</div>`;
+                });
+
+                const primeiroDiaDoMes = new Date(anoAtualCalendario, mesAtualCalendario, 1).getDay();
+                const diasNoMes = new Date(anoAtualCalendario, mesAtualCalendario + 1, 0).getDate();
+
+                const hoje = new Date();
+                const diaAtual = hoje.getDate();
+                const mesAtualReal = hoje.getMonth();
+                const anoAtualReal = hoje.getFullYear();
+
+                const eventosCalendario = todosDados.filter(item => item.categoria === "Calendário");
+
+                for (let i = 0; i < primeiroDiaDoMes; i++) {
+                    htmlCalendario += `<div class="calendar-day empty"></div>`;
+                }
+
+                for (let dia = 1; dia <= diasNoMes; dia++) {
+                    const isToday = dia === diaAtual && mesAtualCalendario === mesAtualReal && anoAtualCalendario === anoAtualReal;
+                    
+                    const dataStr = `${anoAtualCalendario}-${String(mesAtualCalendario + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
+                    const eventosDoDia = eventosCalendario.filter(e => e.dataEvento === dataStr);
+
+                    let eventosHtml = '';
+                    eventosDoDia.forEach(evento => {
+                        const styleCor = evento.cor ? `background: ${evento.cor};` : '';
+                        eventosHtml += `
+                            <div class="calendar-event" title="${evento.titulo}" style="${styleCor}">
+                                ${evento.titulo}
+                                <span class="calendar-event-del" onclick="deletarItem('${evento.id}')" title="Apagar evento">×</span>
+                            </div>
+                        `;
+                    });
+
+                    htmlCalendario += `
+                        <div class="calendar-day ${isToday ? 'today' : ''}">
+                            <div class="calendar-date">${dia}</div>
+                            ${eventosHtml}
+                        </div>
+                    `;
+                }
+
+                htmlCalendario += `</div></div>`;
+                container.innerHTML = htmlCalendario;
                 return;
             }
 
